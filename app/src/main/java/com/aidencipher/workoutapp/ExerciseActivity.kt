@@ -3,6 +3,7 @@ package com.aidencipher.workoutapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_exercise.*
 
@@ -10,6 +11,8 @@ class ExerciseActivity : AppCompatActivity() {
 
     private var restTimer: CountDownTimer? = null
     private var restProgress = 0
+    private var exerciseTimer: CountDownTimer? = null
+    private var exerciseProgress = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +28,7 @@ class ExerciseActivity : AppCompatActivity() {
         }
 
         setUpRestView()
+        //setUpExerciseView()
 
     }
 
@@ -46,7 +50,7 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Toast.makeText(this@ExerciseActivity, "Exercise begins here", Toast.LENGTH_SHORT).show()
+                setUpExerciseView()
             }
         }.start()
     }
@@ -58,5 +62,33 @@ class ExerciseActivity : AppCompatActivity() {
         }
 
         setRestProgressBar()
+    }
+
+    private fun setExerciseProgressBar(){
+        progressBarExercise.progress = exerciseProgress
+        exerciseTimer = object: CountDownTimer(30000, 1000){
+            override fun onTick(millisUntilFinished: Long) {
+                exerciseProgress++
+                progressBarExercise.progress = 30-exerciseProgress
+                tvTimerExercise.text = (30-exerciseProgress).toString()
+            }
+
+            override fun onFinish() {
+                Toast.makeText(this@ExerciseActivity, "Next Exercise begins here", Toast.LENGTH_SHORT).show()
+            }
+        }.start()
+    }
+
+    private fun setUpExerciseView(){
+
+        llReset.visibility = View.GONE
+        llExercise.visibility = View.VISIBLE
+
+        if(exerciseTimer != null){
+            exerciseTimer!!.cancel()
+            exerciseProgress = 0
+        }
+
+        setExerciseProgressBar()
     }
 }
