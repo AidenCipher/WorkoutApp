@@ -14,6 +14,9 @@ class ExerciseActivity : AppCompatActivity() {
     private var exerciseTimer: CountDownTimer? = null
     private var exerciseProgress = 0
 
+    private var exerciseList: ArrayList<ExerciseModel>? = null
+    private var currentExercisePosition = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_exercise)
@@ -28,8 +31,8 @@ class ExerciseActivity : AppCompatActivity() {
         }
 
         setUpRestView()
-        //setUpExerciseView()
 
+        exerciseList = Constants.defaultExerciseList()
     }
 
     override fun onDestroy() {
@@ -50,12 +53,17 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
+                currentExercisePosition++
                 setUpExerciseView()
             }
         }.start()
     }
 
     private fun setUpRestView(){
+
+        llReset.visibility = View.VISIBLE
+        llExercise.visibility = View.GONE
+
         if (restTimer != null){
             restTimer!!.cancel()
             restProgress = 0
@@ -74,7 +82,12 @@ class ExerciseActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Toast.makeText(this@ExerciseActivity, "Next Exercise begins here", Toast.LENGTH_SHORT).show()
+
+                if (currentExercisePosition < exerciseList?.size!! - 1){
+                    setUpRestView()
+                }else{
+                    Toast.makeText(this@ExerciseActivity, "Congratulations on Completing the 7 minute workout!", Toast.LENGTH_SHORT).show()
+                }
             }
         }.start()
     }
@@ -90,5 +103,8 @@ class ExerciseActivity : AppCompatActivity() {
         }
 
         setExerciseProgressBar()
+
+        ivImage.setImageResource(exerciseList!![currentExercisePosition].getImage())
+        tvExerciseName.text = exerciseList!![currentExercisePosition].getName()
     }
 }
