@@ -30,9 +30,9 @@ class ExerciseActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        setUpRestView()
-
         exerciseList = Constants.defaultExerciseList()
+
+        setUpRestView()
     }
 
     override fun onDestroy() {
@@ -68,6 +68,8 @@ class ExerciseActivity : AppCompatActivity() {
             restTimer!!.cancel()
             restProgress = 0
         }
+
+        tvUpcomingExerciseName.text = exerciseList!![currentExercisePosition + 1].getName()
 
         setRestProgressBar()
     }
