@@ -1,5 +1,6 @@
 package com.aidencipher.workoutapp
 
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -22,6 +23,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var currentExercisePosition = -1
 
     private var tts: TextToSpeech? = null
+    private var soundPlayer: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +61,10 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             tts!!.shutdown()
         }
 
+        if (soundPlayer != null){
+            soundPlayer!!.stop()
+        }
+
         super.onDestroy()
     }
 
@@ -79,6 +85,14 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     }
 
     private fun setUpRestView(){
+
+        try {
+            soundPlayer = MediaPlayer.create(applicationContext, R.raw.rest_view_sound)
+            soundPlayer!!.isLooping = false
+            soundPlayer!!.start()
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
 
         llReset.visibility = View.VISIBLE
         llExercise.visibility = View.GONE
