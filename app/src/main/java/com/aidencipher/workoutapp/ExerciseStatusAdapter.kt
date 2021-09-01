@@ -31,9 +31,9 @@ class ExerciseStatusAdapter(val items: ArrayList<ExerciseModel>, val context: Co
         if(model.getIsSelected()){
             holder.tvItem.background = ContextCompat.getDrawable(context, R.drawable.item_circular_thin_color_accent_border)
             holder.tvItem.setTextColor(Color.parseColor("#212121"))
-        }else if(model.getIsSelected()){
+        }else if(model.getIsCompleted()){
             holder.tvItem.background = ContextCompat.getDrawable(context, R.drawable.item_circular_colour_accent_background)
-            holder.tvItem.setTextColor(Color.parseColor("#FFFFFF"))
+            holder.tvItem.setTextColor(Color.parseColor("#000000"))
         }else{
             holder.tvItem.background = ContextCompat.getDrawable(context, R.drawable.item_circular_colour_grey_background)
             holder.tvItem.setTextColor(Color.parseColor("#212121"))
