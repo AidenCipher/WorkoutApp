@@ -34,5 +34,6 @@ class ExerciseStatusAdapter(val items: ArrayList<ExerciseModel>, val context: Co
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val tvItem = view.tvItem!!
+        
     }
 }
