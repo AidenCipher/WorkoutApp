@@ -9,7 +9,6 @@ import android.os.CountDownTimer
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_exercise.*
@@ -208,7 +207,7 @@ class ExerciseActivity : AppCompatActivity(), TextToSpeech.OnInitListener  {
             finish()
             customDialog.dismiss()
         }
-        customDialog.tvYes.setOnClickListener{
+        customDialog.tvNo.setOnClickListener{
             customDialog.dismiss()
         }
         customDialog.show()

@@ -12,6 +12,16 @@
         android:theme="@style/Theme.WorkoutApp"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".HistoryActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".BMIActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".FinishActivity"
             android:exported="true"
             android:screenOrientation="portrait"
